@@ -1,4 +1,5 @@
 export class CreatePersonDto {
-    kahveAdi: string;
-    fiyat: number;
+    title: string;
+    img: string;
+    price: number;
 }

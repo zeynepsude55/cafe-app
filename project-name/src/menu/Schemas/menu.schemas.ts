@@ -5,11 +5,16 @@ export type MenuDocument = HydratedDocument<Menu>;
 
 @Schema()
 export class Menu {
-    @Prop()
-    kahveAdi: string;
 
     @Prop()
-    fiyat: number;
+    title: string;
+
+    @Prop()
+    img: string;
+
+    @Prop()
+    price: number;
+
 }
 
 export const MenuSchema = SchemaFactory.createForClass(Menu);

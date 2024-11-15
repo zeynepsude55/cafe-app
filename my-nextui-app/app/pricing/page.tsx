@@ -91,7 +91,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/kahve-ekle", {
+      const response = await fetch("http://localhost:5000/kahve-ekle", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +122,7 @@ export default function App() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/kahve-sil/${id}`, {
+      const response = await fetch(`http://localhost:5000/kahve-sil/${id}`, {
         method: "DELETE",
       });
 

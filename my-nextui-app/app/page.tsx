@@ -18,12 +18,12 @@ export default function Tatlilar() {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    onLoginOpenChange(false);
+    onLoginOpenChange();
   };
 
   const handleSignup = () => {
     setIsSignedUp(true);
-    onSignupOpenChange(false);
+    onSignupOpenChange();
   };
 
   return (

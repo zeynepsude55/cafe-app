@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import { Card, CardBody, CardFooter, Input, Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image"; 
-import img from "../../public/images/images.jpeg";
+import img1 from "../../public/images/şkr.jpeg";
+import img2 from "../../public/images/kd.jpeg";
+import img3 from "../../public/images/st.jpeg";
+import img4 from "../../public/images/tb.jpeg";
+import img5 from "../../public/images/pp.jpeg";
+import img6 from "../../public/images/kz.jpeg";
+import img7 from "../../public/images/mg.jpeg";
+import img8 from "../../public/images/images.jpeg";
 
 export default function App() {
   const router = useRouter();
@@ -14,50 +21,50 @@ export default function App() {
     {
       id: 1,
       title: "Şekerpare",
-      img: img,
+      img: img1,
       price: "$5.50",
     },
     {
       id: 2,
       title: "Kadayıf",
       price: "$3.00",
-      img: img,
+      img: img2,
     },
     {
       id: 3,
       title: "Sütlaç",
       price: "$10.00",
-      img: img,
+      img: img3,
     },
     {
       id: 4,
       title: "Tulumba",
       price: "$5.30",
-      img: img,
+      img: img4,
     },
     {
       id: 5,
       title: "Profiterol",
       price: "$15.70",
-      img: img,
+      img: img5,
     },
     {
       id: 6,
       title: "Kazandibi",
       price: "$8.00",
-      img: img,
+      img: img6,
     },
     {
       id: 7,
       title: "Magnolya",
       price: "$7.50",
-      img: img,
+      img: img7,
     },
     {
       id: 8,
       title: "Dubai Çikolatası",
       price: "$12.20",
-      img: img,
+      img: img8,
     },
   ]);
 
@@ -82,7 +89,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/tatlı-ekle", { 
+      const response = await fetch("http://localhost:5000/tatlı-ekle", { 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +119,7 @@ export default function App() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/tatlı-sil/${id}`, {
+      const response = await fetch(`http://localhost:5000/tatlı-sil/${id}`, {
         method: "DELETE",
       });
 
