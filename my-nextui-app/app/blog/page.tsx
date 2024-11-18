@@ -5,23 +5,18 @@ import { useRouter } from "next/navigation";
 import { Modal } from "@nextui-org/react";
 import axios from "axios";
 
-
 export default function App() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
-  const [kahveAdı, setKahveAdı] = useState("");
-  const [img, setİmg] = useState("");
-  const [fiyat, setFiyat] = useState("");
   const [menu, setMenu] = useState([]);
+  const [icecek, setIcecek] = useState({
+    title: "",
+    price: "",
+    img: ""
+  })
 
   const [mounted, setMounted] = useState(false);
-
-  const [yeniKahve, setYeniKahve] = useState({
-    title: "deneme",
-    price: 123,
-    img: "",
-  })
 
   useEffect(() => {
     const getAllMenu = async () => {
@@ -42,23 +37,20 @@ export default function App() {
     return null;
   }
 
-  // const filteredList = menu.filter((item: any) =>
-  //   item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+  const handleChange = (e: any) => {
+    const { name, value } = e;
+    setIcecek({ ...icecek, [name]: value });
+  };
 
-
-  const Ekle = (item: any) => {
-    console.log("start item:", item);
-
-    axios.post("http://localhost:5000/menu", item)
-      .then(response => {
-        console.log(response.data);
+  const Ekle = (yeniKahve: any) => {
+    axios
+      .post("http://localhost:5000/menu", yeniKahve)
+      .then((response) => {
+        console.log("basariii");
       })
-      .catch(err => console.log(err))
-
+      .catch(err => console.log("kahve eklenirken hata oluştu:", err))
     console.log("son");
   }
-
 
   const handleKahveSil = async (id: number) => {
     const confirmDelete = window.confirm("Bu kahveyi silmek istediğinizden emin misiniz?");
@@ -74,7 +66,6 @@ export default function App() {
 
   return (
     <div className="flex flex-col">
-
       <div className="mb-10 ml-96 w-full max-w-lg">
         <Input
           placeholder="Soğuk Kahve Ara"
@@ -82,7 +73,6 @@ export default function App() {
           className="w-full"
         />
       </div>
-
 
       <div className="mt-8 ml-32 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center items-center mx-auto max-w-6xl w-full">
         {menu.length > 0 ? (
@@ -118,138 +108,74 @@ export default function App() {
               className="relative"
             >
               <CardBody className="p-0 flex items-center justify-center overflow-hidden">
-
                 <Button
-                  // onPress={onOpen}
-                  onClick={() => { Ekle(yeniKahve) }}
+                  onPress={onOpen}
                   className="w-20 h-20 bg-pink-500 text-white text-4xl rounded-none shadow-none border-none hover:bg-pink-600 focus:bg-pink-600"
                 >
                   +
                 </Button>
 
-                <Modal
-                  backdrop="opaque"
-                  isOpen={isOpen}
-                  onOpenChange={onOpenChange}
-                  classNames={{
-                    backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
-                  }}
-                >
-                  <ModalContent>
-                    {(onClose) => (
-                      <>
-                        <ModalHeader className="flex flex-col gap-1"></ModalHeader>
-                        <ModalBody>
-                          <p>
-
-                            <div className="mb-4 ml-60">
-                              <Input
-                                placeholder="Kahve Adı"
-                                value={kahveAdı}
-                                onChange={(e) => setKahveAdı(e.target.value)}
-                                className="w-full mb-2"
-                              />
-                              <Input
-                                placeholder="Fiyat"
-                                value={fiyat}
-                                onChange={(e) => setFiyat(e.target.value)}
-                                className="w-full mb-4"
-                              />
-                              <Input
-                                placeholder="Fotoğraf"
-                                value={img}
-                                onChange={(e) => setİmg(e.target.value)}
-                                className="w-full mb-4"
-                              />
-
-
-                            </div>
-                          </p>
-
-                        </ModalBody>
-                        <ModalFooter>
-                          <Button color="danger" variant="light" onPress={onClose}>
-                            Kapat
-                          </Button>
-                          <Button color="primary" onPress={onClose}>
-                            Kahve Ekle
-                          </Button>
-                        </ModalFooter>
-                      </>
-                    )}
-                  </ModalContent>
-                </Modal>
               </CardBody>
             </Card>
           </>
         ) : (
-          <Card
-            shadow="sm"
-            key="add-new"
-            isPressable
-            className="relative"
-          >
-            <CardBody className="p-0 flex items-center justify-center overflow-hidden">
-              <Button
-                onPress={onOpen}
-              // onClick={Ekle}
-              >
-                +
-              </Button>
-              <Modal
-                backdrop="opaque"
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                classNames={{
-                  backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
-                }}
-              >
-                <ModalContent>
-                  {(onClose) => (
-                    <>
-                      <ModalHeader className="flex flex-col gap-1"></ModalHeader>
-                      <ModalBody className="flex flex-col items-center justify-center ml-5">
-                        <p>
-                          <div className="w-full">
-                            <Input
-                              placeholder="Kahve Adı"
-                              value={kahveAdı}
-                              onChange={(e) => setKahveAdı(e.target.value)}
-                              className="w-full mb-2"
-                            />
-                            <Input
-                              placeholder="Fiyat"
-                              value={fiyat}
-                              onChange={(e) => setFiyat(e.target.value)}
-                              className="w-full mb-4"
-                            />
-                            <Input
-                              placeholder="Fotoğraf"
-                              value={img}
-                              onChange={(e) => setİmg(e.target.value)}
-                              className="w-full mb-4"
-                            />
+          <p>Menü boş.</p>
+        )}
 
-
-                          </div>
-                        </p>
-
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button color="danger" variant="light" onPress={onClose}>
-                          Kapat
-                        </Button>
-                        <Button color="primary" onPress={onClose}>
-                          Kahve Ekle
-                        </Button>
-                      </ModalFooter>
-                    </>
-                  )}
-                </ModalContent>
-              </Modal>
-            </CardBody>
-          </Card>)}
+        <Modal
+          backdrop="opaque"
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          classNames={{
+          backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
+          }}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1"></ModalHeader>
+                <ModalBody>
+                  <div className="mb-4">
+                    <Input
+                      placeholder="Kahve Adı"
+                      name="title"
+                      value={icecek.title}
+                      onChange={(e) => { handleChange(e.target) }}
+                      className="w-full mb-2"
+                    />
+                    <Input
+                      placeholder="Fiyat"
+                      name="price"
+                      value={icecek.price}
+                      onChange={(e) => { handleChange(e.target) }}
+                      className="w-full mb-4"
+                    />
+                    <Input
+                      placeholder="Fotoğraf"
+                      name="img"
+                      value={icecek.img}
+                      onChange={(e) => { handleChange(e.target) }}
+                      className="w-full mb-4"
+                    />
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Kapat
+                  </Button>
+                  <Button color="primary" onPress={() => {
+                    onClose()
+                    Ekle(icecek)
+                  }}>
+                    Kahve Ekle
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </div>
     </div>
   );
 }
+

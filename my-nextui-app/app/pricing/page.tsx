@@ -61,12 +61,7 @@ export default function App() {
   price: "$7.50",
   img: img7,
 },
-{
-  id: 8,
-  title: "Filtre Kahve",
-  price: "$12.20",
-  img: img8,
-},
+
 ]);
 
   const [mounted, setMounted] = useState(false);
