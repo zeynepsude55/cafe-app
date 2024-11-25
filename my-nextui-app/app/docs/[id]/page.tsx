@@ -11,7 +11,7 @@ function Menu({ params }: { params: { id: number } }) {
       <Image
         isZoomed
         height={500}
-        width={900}
+        width={700}
         alt="NextUI Fruit Image with Zoom"
         src={img.src}
       />

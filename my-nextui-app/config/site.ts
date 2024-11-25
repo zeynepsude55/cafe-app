@@ -18,9 +18,7 @@ export const siteConfig = {
       label: "Soğuk Kahveler",
       href: "/blog",
     },
-    {
-
-    },
+   
     
   ],
   navMenuItems: [

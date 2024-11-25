@@ -4,12 +4,13 @@ import { AppService } from './app.service';
 import { MenuModule } from './menu/menu.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { KahveModule } from './kahve/kahve.module';  
+import { TatliModule } from "./tatli/tatli.module";
 
 @Module({
   imports: [
     MenuModule,
     MongooseModule.forRoot('mongodb://localhost:27017/NestJsTest'),
-    KahveModule, 
+    KahveModule, TatliModule,
   ],
   controllers: [AppController],
   providers: [AppService],

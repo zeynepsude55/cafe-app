@@ -51,7 +51,7 @@ let kahveler = [
   },
 ];
 
-// Kahve Ekleme Endpoint
+
 app.post('/kahve-ekle', (req, res) => {
   const { kahveAdı, fiyat } = req.body;
 
@@ -60,10 +60,10 @@ app.post('/kahve-ekle', (req, res) => {
   }
 
   const newKahve = {
-    id: kahveler.length + 1, // Yeni id oluşturuyoruz
+    id: kahveler.length + 1,
     title: kahveAdı,
     price: fiyat,
-    img: "http://localhost:3000/images/ice-latte.jpeg" // Varsayılan bir resim
+    img: "http://localhost:3000/images/ice-latte.jpeg" 
   };
 
   kahveler.push(newKahve);

@@ -24,8 +24,8 @@ export class kahveController {
     }
 
     @Put(":id")
-    update(@Param("id") identity, @Body() allProps: CreatePersonDto) : Promise <Kahve> {
-        return this.KahveService.update(identity, allProps);
+    update(@Param("id") id, @Body() allProps: CreatePersonDto) : Promise <Kahve> {
+        return this.KahveService.update(id, allProps);
     }
 
     @Delete(":id")
