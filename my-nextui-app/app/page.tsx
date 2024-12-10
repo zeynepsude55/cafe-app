@@ -71,9 +71,9 @@ export default function Tatlilar() {
           </div>
         ) : (
           <div className="flex gap-4 items-center">
-            <Button onPress={onLoginOpen} color="primary" className="w-full max-w-xs">
+            {/* <Button onPress={onLoginOpen} color="primary" className="w-full max-w-xs">
               Giriş Yap
-            </Button>
+            </Button> */}
           </div>
         )}
       </div>

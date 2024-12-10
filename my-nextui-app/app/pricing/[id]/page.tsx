@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Image, Checkbox, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react";
-import img1 from "../../../public/images/lt.jpeg";
+import { Image, Spinner, Checkbox, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react";
 import axios from "axios";
 import { Kahve } from '../../../../project-name/src/kahve/schemas/kahve.schemas';
 
@@ -17,23 +16,24 @@ function Menu({ params }: { params: { id: number } }) {
   const [milk, setMilk] = useState<string[]>([]);
   const [syrup, setSyrup] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [kahve, setKahve] = useState<Kahve |null >(null);
+  const [kahve, setKahve] = useState<Kahve | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const id = params.id;
 
   useEffect(() => {
     const getAllMenu = async () => {
-      const data = (await axios.get("http://localhost:5000/kahve/"+id)).data
-      setKahve(data);
       setLoading(true);
+      const data = (await axios.get("http://localhost:5000/kahve/" + id)).data
+      setKahve(data);
       console.log(data);
+      setLoading(false)
     };
     getAllMenu();
     return () => {
 
     }
   }, [])
-  
+
   const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       setSize([...size, e.target.value]);
@@ -61,9 +61,15 @@ function Menu({ params }: { params: { id: number } }) {
   const handleShowSelections = () => {
     setIsModalOpen(true);
   };
-  
-  if(loading) return <div>Yükleniyor...</div>
-  
+
+  if (loading) {
+    return (
+      <div style={{ display: "flex" }}>
+        <Spinner size="lg" color="primary" />
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap' }}>
       <div style={{ flex: '1', maxWidth: '500px' }}>
@@ -75,7 +81,7 @@ function Menu({ params }: { params: { id: number } }) {
           src={kahve?.img}
         />
       </div>
-    
+
       <div style={{ flex: '1', maxWidth: '500px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
         <div style={{ marginBottom: '20px', marginTop: '10px' }}>
           <h3>Boyut Seçiniz:</h3>
@@ -107,7 +113,7 @@ function Menu({ params }: { params: { id: number } }) {
             <ModalBody>
               <div><strong>Boyut:</strong> {size.join(", ") || "Seçilmedi"}</div>
               <div><strong>Süt Seçimi:</strong> {milk.join(", ") || "Seçilmedi"}</div>
-      
+
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={() => setIsModalOpen(false)}>

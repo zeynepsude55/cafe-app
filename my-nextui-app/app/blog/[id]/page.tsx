@@ -1,15 +1,35 @@
 "use client";
 
-import { useState } from "react";
-import { Image, Checkbox, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import { Image, Checkbox, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Spinner } from "@nextui-org/react";
 import img from "../../../public/images/ice-latte.jpeg";
+import axios from "axios";
+// import { menu } from '../../../../project-name/src/menu/Schemas/menu.schemas';
+
+
 
 function Menu({ params }: { params: { id: number } }) {
   const [size, setSize] = useState<string[]>([]);
   const [milk, setMilk] = useState<string[]>([]);
   const [syrup, setSyrup] = useState<string[]>([]);
+  // const [ menu, setMenu] =useState<menu | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const id = params.id;
 
+  useEffect(() => {
+    const getAllMenu = async () => {
+      setLoading(true);
+      const data = (await axios.get("http://localhost:5000/menu/" + id)).data
+      // setMenu(data);
+      console.log(data);
+      setLoading(false)
+    };
+    getAllMenu();
+    return () => {
+
+    }
+  }, [])
 
   const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -38,6 +58,14 @@ function Menu({ params }: { params: { id: number } }) {
   const handleShowSelections = () => {
     setIsModalOpen(true);
   };
+
+  if (loading) {
+    return (
+      <div style={{ display: "flex" }}>
+        <Spinner size="lg" color="primary" />
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap' }}>
@@ -113,4 +141,4 @@ function Menu({ params }: { params: { id: number } }) {
   );
 }
 
-export default Menu;
+export default Menu; 

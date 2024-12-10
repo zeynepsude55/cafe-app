@@ -68,7 +68,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col">
-      <div className="mb-10 ml-96 w-full max-w-lg">
+      <div className="hidden md:flex mb-10 ml-96 w-full max-w-lg">
         <Input
           placeholder="Tatlı Ara"
           onChange={(e) => setSearchTerm(e.target.value)}

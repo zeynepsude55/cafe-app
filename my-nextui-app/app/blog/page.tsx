@@ -17,7 +17,6 @@ import { useRouter } from "next/navigation";
 import { Modal } from "@nextui-org/react";
 import axios from "axios";
 
-
 export default function App() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
@@ -69,7 +68,8 @@ export default function App() {
     );
     if (!confirmDelete) return;
 
-    await axios.delete(`http://localhost:5000/menu/` + id).then((response) => {
+    axios.delete(`http://localhost:5000/mebu/${id}`)
+.then((response) => {
       setMenu(menu.filter((kahve: any) => kahve._id !== id));
     });
   };
