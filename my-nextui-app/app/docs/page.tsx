@@ -13,7 +13,7 @@ export default function App() {
   const [Tatli, setTatli] = useState({
     title: "",
     price: "",
-    img: ""
+    img: "",
   });
 
   const [mounted, setMounted] = useState(false);
@@ -95,12 +95,17 @@ export default function App() {
                   />
                 </CardBody>
                 <CardFooter className="text-small justify-between">
-                  <b>{item.title}</b>
-                  <p className="text-default-500">{item.price}</p>
-                  <Button color="danger" onClick={() => handleTatliSil(item._id)}>
-                    Sil
-                  </Button>
-                </CardFooter>
+  <b>{item.title}</b>
+  <p className="text-default-500">{item.price}</p>
+  <Button
+  onPress={() => handleTatliSil(item._id)}
+  className="bg-pink-500 text-white text-sm py-2 px-6 rounded-full hover:bg-pink-600 focus:bg-pink-600"
+>
+  Sil
+</Button>
+
+</CardFooter>
+
               </Card>
             ))}
             <Card
@@ -163,13 +168,17 @@ export default function App() {
                   </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
+                  <Button color="danger" variant="light"
+                    onPress={onClose}
+                  >
                     Kapat
                   </Button>
-                  <Button color="primary" onPress={() => {
-                    onClose();
-                    Ekle(Tatli);
-                  }}>
+                  <Button color="primary"
+                    onPress={() => {
+                      onClose();
+                      Ekle(Tatli);
+                    }}
+                  >
                     Tatlı Ekle
                   </Button>
                 </ModalFooter>

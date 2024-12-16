@@ -25,7 +25,7 @@ export default function App() {
       });
     };
     getAllMenu();
-  }, []);
+  }, [setMenu]);
 
   useEffect(() => {
     setMounted(true);

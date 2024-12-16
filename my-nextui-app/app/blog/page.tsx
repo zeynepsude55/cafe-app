@@ -103,12 +103,14 @@ export default function App() {
                 className="relative"
               >
                 <CardBody className="p-0 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src={item?.img}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-all duration-300 ease-in-out transform hover:brightness-75"
-                  />
-                </CardBody>
+  {item?.img ? (
+    <Image
+      src={item.img}
+      alt={item.title}
+      className="w-full h-full object-cover transition-all duration-300 ease-in-out transform hover:brightness-75"
+    />
+  ) : null}
+</CardBody>
                 <CardFooter className="text-small justify-between">
                   <b>{item.title}</b>
                   <p className="text-default-500">{item.price}</p>
